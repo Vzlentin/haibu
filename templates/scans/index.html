@@ -1,0 +1,13 @@
+<html>
+   <head>
+      <title>Better Than Japscan 2</title>
+   </head>
+   <h1>Home</h1>
+   <body>
+      <ul id="navigation">
+         {% for work in works %}
+	 <li><a href="{{ url_for('scans_app.work', work_id=work) }}">{{ work }}</a></li>
+         {% endfor %}
+      </ul>
+   </body>
+</html>

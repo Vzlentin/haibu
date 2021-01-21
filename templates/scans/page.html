@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>{{work}} {{chapter}}</title>
+</head>
+<h1>{{work}} {{chapter}}</h1>
+<body>
+	<div id="navigation">
+        	<a href="{{ url_for('scans_app.home')}}">Menu</a>
+		<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page-1) }}">Previous page</a>
+         	<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">Next page</a>
+         	<select name="listchapters" onchange="location = this.value;">
+            	{% for select_chapter in chapters %}
+               		<option value="{{ url_for('scans_app.page', work_id=work, chapter_id=select_chapter, page_id=1) }}">{{select_chapter}}</option>
+            	{% endfor %}
+         	</select>
+	</div>
+	<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">
+		<img src="{{ url_for('static', filename=path) }}" text-align="center">
+	</a>
+</body>
+<script>
+	window.addEventListener("keydown", function (event) {
+        if(event.defaultPrevented) {
+		return;
+        }
+        switch (event.key) {
+		case "ArrowLeft":
+			document.location.href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page-1) }}"
+			break;
+		case "ArrowRight":
+			document.location.href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}"
+                	break;
+                case "ArrowUp":
+                  	document.scrollingElement.scrollTop -= 100
+                  	break;
+               	case "ArrowDown":
+                  	document.scrollingElement.scrollTop += 100
+                  	break;
+            }
+        event.preventDefault();
+        }, true);
+</script>
+</html>

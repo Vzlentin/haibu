@@ -1,0 +1,13 @@
+<html>
+   <head>
+      <title>{{work}}</title>
+   </head>
+   <h1>{{work}}</h1>
+   <body>
+      <ul id="navigation">
+        {% for season in seasons %}
+	<li><a href="{{ url_for('anime_app.season', work_id=work, season_id=season) }}">{{ season }}</a></li>
+        {% endfor %}
+      </ul>
+   </body>
+</html>

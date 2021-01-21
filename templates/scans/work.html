@@ -1,0 +1,13 @@
+<html>
+   <head>
+      <title>{{work}}</title>
+   </head>
+   <h1>{{work}}</h1>
+   <body>
+      <ul id="navigation">
+        {% for chapter in chapters %}
+	<li><a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
+        {% endfor %}
+      </ul>
+   </body>
+</html>
