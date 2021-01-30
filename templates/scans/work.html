@@ -1,13 +1,15 @@
 <html>
-   <head>
-      <title>{{work}}</title>
-   </head>
-   <h1>{{work}}</h1>
-   <body>
-      <ul id="navigation">
-        {% for chapter in chapters %}
-	<li><a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
-        {% endfor %}
-      </ul>
-   </body>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<title>{{work}}</title>
+	</head>
+	<body>
+		<h1>{{work}}</h1>
+		<a href="{{ url_for('home')}}">Menu</a>
+		<ul id="navigation">
+			{% for chapter in chapters %}
+			<li><a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
+			{% endfor %}
+		</ul>
+	</body>
 </html>

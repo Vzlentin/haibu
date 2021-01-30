@@ -32,4 +32,4 @@ df["season"] = seasonn
 df["episode"] = episodee
 
 df = df.sort_values(by=["season", "work","episode"]).reset_index(drop=True)
-df.to_csv(os.path.join(os.path.dirname(os.path.realpath(__file__)), "anime.csv"), index=False)
+df.to_csv(os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/anime.csv"), index=False)

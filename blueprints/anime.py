@@ -24,5 +24,7 @@ def season(work_id, season_id):
 @anime_app.route("/<work_id>/<season_id>/<episode_id>")
 def episode(work_id, season_id, episode_id):
     path = df[(df.work == work_id) & (df.season == season_id) & (df.episode == episode_id)].path.iloc[0]
-    print(path)
-    return redirect(f"/static/anime/{path}")
+    try:
+        return redirect(f"/static/anime/{path}")
+    except:
+        print("Request aborted")

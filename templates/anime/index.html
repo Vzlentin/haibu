@@ -1,13 +1,15 @@
 <html>
-   <head>
-      <title>Better Than One Piece Streaming</title>
-   </head>
-   <h1>Home</h1>
-   <body>
-      <ul id="navigation">
-         {% for work in works %}
-	 <li><a href="{{ url_for('anime_app.work', work_id=work) }}">{{ work }}</a></li>
-         {% endfor %}
-      </ul>
-   </body>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<title>Better Than One Piece Streaming</title>
+	</head>
+	<body>
+		<h1>Better Than One Piece Streaming</h1>
+		<a href="{{ url_for('home')}}">Menu</a>
+		<ul id="navigation">
+			{% for work in works %}
+			<li><a href="{{ url_for('anime_app.work', work_id=work) }}">{{ work }}</a></li>
+			{% endfor %}
+		</ul>
+	</body>
 </html>

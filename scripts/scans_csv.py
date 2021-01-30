@@ -36,4 +36,4 @@ def without_last_4chars(x):
 
 df.page = df.page.apply(without_last_4chars)
 df = df.sort_values(by=["chap", "work","page"]).reset_index(drop=True)
-df.to_csv(os.path.join(os.path.dirname(os.path.realpath(__file__)), "scans.csv"), index=False)
+df.to_csv(os.path.join(os.path.dirname(os.path.realpath(__file__)), "data/scans.csv"), index=False)
