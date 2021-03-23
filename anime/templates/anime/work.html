@@ -5,10 +5,10 @@
 	</head>
 	<body>
 		<h1>{{work}}</h1>
-		<a href="{{ url_for('home')}}">Menu</a>
+		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
 			{% for season in seasons %}
-			<li><a href="{{ url_for('anime_app.season', work_id=work, season_id=season) }}">{{ season }}</a></li>
+			<li><a href="{{ url_for('anime_bp.season', work_id=work, season_id=season) }}">{{ season }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

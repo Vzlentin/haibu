@@ -5,24 +5,24 @@
 	</head>
 	<body>
 		<h1>{{work}} {{chapter}}</h1>
-		<a href="{{ url_for('home')}}">Menu</a>
+		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<div id="navigation">
-			<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page-1) }}">Previous page</a>
-			<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">Next page</a>
+			<a href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=page-1) }}">Previous page</a>
+			<a href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">Next page</a>
          		<select name="listchapters" onchange="location = this.value;">Chapters
             		{% for select_chapter in chapters %}
-               			<option value="{{ url_for('scans_app.page', work_id=work, chapter_id=select_chapter, page_id=1) }}">{{select_chapter}}</option>
+               			<option value="{{ url_for('scans_bp.page', work_id=work, chapter_id=select_chapter, page_id=1) }}">{{select_chapter}}</option>
             		{% endfor %}
          		</select>
 			<select name="listpages" onchange="location = this.value;">Pages
             		{% for select_page in pages %}
-               			<option value="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=select_page) }}">{{select_page}}</option>
+               			<option value="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=select_page) }}">{{select_page}}</option>
             		{% endfor %}
          		</select>
 
 		</div>
 		<div style="text-align: center">
-			<a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">
+			<a href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=page+1) }}">
 				<img src="{{ url_for('static', filename=path) }}" align="center" style="max-width:100%">
 			</a>
 		</div>
@@ -34,10 +34,10 @@
 			}
 			switch (event.key) {
 				case "ArrowLeft":
-					document.location.href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page-1) }}"
+					document.location.href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=page-1) }}"
 					break;
 				case "ArrowRight":
-					document.location.href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=page+1) }}"
+					document.location.href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=page+1) }}"
 					break;
 				case "ArrowUp":
                   			document.scrollingElement.scrollTop -= 100

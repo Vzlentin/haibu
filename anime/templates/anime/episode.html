@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<title>{{episode}}</title>
+	</head>
+	<body>
+		<h1>{{episode}}</h1>
+		<a href="{{ url_for('home_bp.home')}}">Menu</a>
+		<div style="text-align: center">
+			<video controls id="video">
+				<source src={{ url_for('static', filename=path, _anchor='t='+t) | replace('%3D', '=') }} type="video/mp4">
+			</video>
+		</div>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+		function bookmark() {
+			var url = "{{ url_for('anime_bp.register_timestamp') }}";
+                	var data = {
+				work: "{{work}}",
+				season: "{{season}}",
+				episode: "{{episode}}",
+				t: document.getElementById('video').currentTime
+			};
+                	$.post(url, data);
+            	}
+
+		video.addEventListener('play', () => {
+  			video._updateInterval = setInterval(() => {
+    			bookmark();
+  			}, 5000);
+		}, true);
+
+		video.addEventListener('pause', () => clearInterval(video._updateInterval), true);
+        </script>
+</html>

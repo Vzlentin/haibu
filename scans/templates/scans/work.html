@@ -5,10 +5,10 @@
 	</head>
 	<body>
 		<h1>{{work}}</h1>
-		<a href="{{ url_for('home')}}">Menu</a>
+		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
 			{% for chapter in chapters %}
-			<li><a href="{{ url_for('scans_app.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
+			<li><a href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

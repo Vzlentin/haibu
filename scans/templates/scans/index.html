@@ -5,10 +5,10 @@
 	</head>
 	<body>
 		<h1>Better Than Japscan 2</h1>
-		<a href="{{ url_for('home')}}">Menu</a>
+		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
 			{% for work in works %}
-			<li><a href="{{ url_for('scans_app.work', work_id=work) }}">{{ work }}</a></li>
+			<li><a href="{{ url_for('scans_bp.work', work_id=work) }}">{{ work }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>
