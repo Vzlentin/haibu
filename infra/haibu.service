@@ -1,0 +1,12 @@
+[Unit]
+Description=Weebland by megatron the great
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/opt/haibu
+ExecStart=python3 /opt/haibu/haibu.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
