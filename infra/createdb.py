@@ -58,7 +58,7 @@ def genesis():
 
 def main(scans_static_path, anime_static_path):
 
-    os.chdir("app")
+    os.chdir("../app")
 
     if not os.path.exists(scans_static_path):
         scans_media_path = os.path.join(MEDIA_PATH,"Scans")
