@@ -7,10 +7,14 @@ then
 	sudo chown -R pi:pi /opt/haibu
 fi
 
+cd /opt/haibu
+
 if [ ! -f "/opt/haibu/app.db" ]
 then
-	python3 /opt/haibu/infra/createdb.py
+	python3 infra/createdb.py
 fi
+
+pip3 install -r requirements.txt
 
 sudo mv /opt/haibu/infra/haibu.service /etc/systemd/system/
 
