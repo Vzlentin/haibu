@@ -7,8 +7,8 @@
 		<h1>Better Than One Piece Streaming</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
-			{% for work in works %}
-			<li><a href="{{ url_for('anime_bp.work', work_id=work) }}">{{ work }}</a></li>
+			{% for anime in animes %}
+			<li><a href="{{ url_for('anime_bp.anime', anime=anime) }}">{{ anime }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

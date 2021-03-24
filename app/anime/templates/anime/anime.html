@@ -1,14 +1,14 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width">
-		<title>{{work}}</title>
+		<title>{{anime}}</title>
 	</head>
 	<body>
-		<h1>{{work}}</h1>
+		<h1>{{anime}}</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
-			{% for chapter in chapters %}
-			<li><a href="{{ url_for('scans_bp.page', work_id=work, chapter_id=chapter, page_id=1) }}">{{ chapter }}</a></li>
+			{% for season in seasons %}
+			<li><a href="{{ url_for('anime_bp.season', anime=anime, season=season) }}">{{ season }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

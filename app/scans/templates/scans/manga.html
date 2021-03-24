@@ -1,14 +1,14 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width">
-		<title>Better Than Japscan 2</title>
+		<title>{{manga}}</title>
 	</head>
 	<body>
-		<h1>Better Than Japscan 2</h1>
+		<h1>{{manga}}</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
-			{% for work in works %}
-			<li><a href="{{ url_for('scans_bp.work', work_id=work) }}">{{ work }}</a></li>
+			{% for chapter in chapters %}
+			<li><a href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=1) }}">{{ chapter }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

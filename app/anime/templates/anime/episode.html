@@ -8,7 +8,7 @@
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<div style="text-align: center">
 			<video controls id="video">
-				<source src={{ url_for('static', filename=path, _anchor='t='+t) | replace('%3D', '=') }} type="video/mp4">
+				<source src={{ url_for('anime_bp.static', filename=path, _anchor='t='+t) | replace('%3D', '=') }} type="video/mp4">
 			</video>
 		</div>
 	</body>
@@ -17,7 +17,7 @@
 		function bookmark() {
 			var url = "{{ url_for('anime_bp.register_timestamp') }}";
                 	var data = {
-				work: "{{work}}",
+				anime: "{{anime}}",
 				season: "{{season}}",
 				episode: "{{episode}}",
 				t: document.getElementById('video').currentTime

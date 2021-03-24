@@ -1,15 +1,14 @@
 #!/usr/bin/python
 
-from flask import Flask, redirect, render_template, url_for, request, session
-from markupsafe import escape
-
-from extensions import db
-
-from home.home import home_bp
-from anime.anime import anime_bp
-from scans.scans import scans_bp
+from flask import Flask
+from flask_migrate import Migrate
 
 from config import Config
+from extensions import db
+
+from app.home import home_bp
+from app.anime import anime_bp
+from app.scans import scans_bp
 
 def create_app():
     app = Flask(__name__.split('.')[0])
@@ -19,10 +18,10 @@ def create_app():
 
 def register_extensions(app):
     db.init_app(app)
+    migrate = Migrate(app, db)
     app.register_blueprint(home_bp)
     app.register_blueprint(anime_bp, url_prefix='/anime')
     app.register_blueprint(scans_bp, url_prefix='/scans')
 
-if __name__ == "__main__":
-    app = create_app()
-    app.run(host='0.0.0.0')
+
+app = create_app()

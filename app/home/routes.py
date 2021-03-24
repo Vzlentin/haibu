@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-from flask import Blueprint, redirect, render_template, request, session, url_for
+from flask import redirect, render_template, request, session, url_for
 
-home_bp = Blueprint('home_bp', __name__, template_folder='templates')
+from app.home import home_bp
 
 @home_bp.route('/')
 def home():
