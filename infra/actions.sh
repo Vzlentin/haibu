@@ -13,7 +13,7 @@ then
 	python3 createdb.py
 fi
 
-pip3 install -r requirements.txt
+pip3 install -r /opt/haibu/requirements.txt
 
 sudo mv /opt/haibu/infra/haibu.service /etc/systemd/system/
 
