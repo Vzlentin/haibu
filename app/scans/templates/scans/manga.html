@@ -1,14 +1,14 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width">
-		<title>{{manga}}</title>
+		<title>{{m}}</title>
 	</head>
 	<body>
-		<h1>{{manga}}</h1>
+		<h1>{{m}}</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
 			{% for chapter in chapters %}
-			<li><a href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=1) }}">{{ chapter }}</a></li>
+			<li><a href="{{ url_for('scans_bp.page', m=m, c=chapter, p=1) }}">{{ chapter }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

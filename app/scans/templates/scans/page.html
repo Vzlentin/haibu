@@ -1,28 +1,29 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width">
-		<title>{{manga}} {{chapter}}</title>
+		<title>{{m}} {{c}}</title>
 	</head>
 	<body>
-		<h1>{{manga}} {{chapter}}</h1>
+		<h1>{{m}} {{c}}</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<div id="navigation">
-			<a href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=page-1) }}">Previous page</a>
-			<a href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=page+1) }}">Next page</a>
-         		<select name="listchapters" onchange="location = this.value;">Chapters
-            		{% for select_chapter in chapters %}
-               			<option value="{{ url_for('scans_bp.page', manga=manga, chapter=select_chapter, page=1) }}">{{select_chapter}}</option>
-            		{% endfor %}
+			<a href="{{ url_for('scans_bp.page', m=m, c=c-1, p=0) }}">Previous chapter</a>
+			<a href="{{ url_for('scans_bp.page', m=m, c=c+1, p=0) }}">Next chapter</a>
+			<select name="listchapters" onchange="location = this.value;">Chapters
+            			{% for select_chapter in chapters %}
+               			<option {% if select_chapter == c %}selected = "selected"{% endif %} value="{{ url_for('scans_bp.page', m=m, c=select_chapter, p=1) }}">{{select_chapter}}</option>
+            			{% endfor %}
          		</select>
 			<select name="listpages" onchange="location = this.value;">Pages
-            		{% for select_page in pages %}
-               			<option value="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=select_page) }}">{{select_page}}</option>
-            		{% endfor %}
+            			{% for select_page in pages %}
+				<option {% if select_page == p %} selected = "selected" {% endif %} value="{{ url_for('scans_bp.page', m=m, c=c, p=select_page) }}">{{select_page}}</option>
+            			{% endfor %}
          		</select>
-
+			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p-1) }}">Previous page</a>
+			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p+1) }}">Next page</a>
 		</div>
 		<div style="text-align: center">
-			<a href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=page+1) }}">
+			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p+1) }}">
 				<img src="{{ url_for('scans_bp.static', filename=path) }}" align="center" style="max-width:100%">
 			</a>
 		</div>
@@ -34,14 +35,18 @@
 			}
 			switch (event.key) {
 				case "ArrowLeft":
-					document.location.href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=page-1) }}"
+				case "h":
+					document.location.href="{{ url_for('scans_bp.page', m=m, c=c, p=p-1) }}"
 					break;
+				case "l":
 				case "ArrowRight":
-					document.location.href="{{ url_for('scans_bp.page', manga=manga, chapter=chapter, page=page+1) }}"
+					document.location.href="{{ url_for('scans_bp.page', m=m, c=c, p=p+1) }}"
 					break;
+				case "k":
 				case "ArrowUp":
                   			document.scrollingElement.scrollTop -= 100
                   			break;
+				case "j":
                			case "ArrowDown":
 					document.scrollingElement.scrollTop += 100
 					break;

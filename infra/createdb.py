@@ -1,13 +1,17 @@
 #!/usr/bin/python
 import os, sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT_FOLDER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+sys.path.append(ROOT_FOLDER)
 
 from extensions import db
 from config import MEDIA_PATH
 
 from app.models import *
 from app import app
+
+#def check_existence(model, key)
 
 def populate_scans(path):
 
@@ -58,13 +62,11 @@ def genesis():
 
 def main(scans_static_path, anime_static_path):
 
-    os.chdir("../app")
-
-    if not os.path.exists(scans_static_path):
+    if not os.path.islink(scans_static_path):
         scans_media_path = os.path.join(MEDIA_PATH,"Scans")
         os.system(f"ln -s {scans_media_path} {scans_static_path}")
 
-    if not os.path.exists(anime_static_path):
+    if not os.path.islink(anime_static_path):
         anime_media_path = os.path.join(MEDIA_PATH,"Anime")
         os.system(f"ln -s {anime_media_path} {anime_static_path}")
 
@@ -76,4 +78,7 @@ def main(scans_static_path, anime_static_path):
         populate_anime(anime_static_path)
 
 if __name__ == "__main__":
-    main("scans/static", "anime/static")
+    app_folder = os.path.join(ROOT_FOLDER, "app")
+    scans_static_path = os.path.join(app_folder, "scans/static")
+    anime_static_path = os.path.join(app_folder, "anime/static")
+    main(scans_static_path, anime_static_path)

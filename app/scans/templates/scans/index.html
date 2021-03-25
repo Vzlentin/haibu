@@ -8,7 +8,7 @@
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<ul id="navigation">
 			{% for manga in mangas %}
-			<li><a href="{{ url_for('scans_bp.manga', manga=manga) }}">{{ manga }}</a></li>
+			<li><a href="{{ url_for('scans_bp.manga', m=manga) }}">{{ manga }}</a></li>
 			{% endfor %}
 		</ul>
 	</body>

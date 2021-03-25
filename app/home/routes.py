@@ -4,19 +4,8 @@ from flask import redirect, render_template, request, session, url_for
 
 from app.home import home_bp
 
-@home_bp.route('/')
+@home_bp.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home/home.html')
-
-@home_bp.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
+    if request.method == 'POST' and 'username' in request.form:
         session['username'] = request.form['username']
-        return redirect(url_for('home_bp.home'))
-    return render_template('home/login.html')
-
-@home_bp.route('/test')
-def index():
-    if 'username' in session:
-        return f"Logged in as {session['username']}"
-    return 'You are not logged in'
+    return render_template('home/home.html')

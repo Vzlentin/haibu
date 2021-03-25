@@ -9,5 +9,12 @@
 			<li><a href="{{ url_for('anime_bp.home') }}">Anime</a></li>
 			<li><a href="{{ url_for('scans_bp.home') }}">Scans</a></li>
 		</ul>
+		{% if session['username'] %}
+			<p>Hello {{ session['username'] }}</p>
+		{% endif %}
+		<form method="post">
+			<p><input type=text name=username>
+			<p><input type=submit value=Login>
+		</form>
 	</body>
 </html>
