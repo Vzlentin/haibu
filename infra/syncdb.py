@@ -57,7 +57,7 @@ def populate_anime(path):
                     db.session.commit()
 
 def genesis():
-    if not User.query(username='vzl3ntin'):
+    if not User.query(username='vzl3ntin').first():
         u = User(username='vzl3ntin')
         db.session.add(u)
         db.session.commit()
