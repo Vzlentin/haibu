@@ -23,5 +23,4 @@ def register_extensions(app):
     app.register_blueprint(anime_bp, url_prefix='/anime')
     app.register_blueprint(scans_bp, url_prefix='/scans')
 
-
 app = create_app()

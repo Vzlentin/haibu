@@ -6,6 +6,8 @@ from app.models import User, Anime, Season, Episode, AnimeBookmark
 from app.anime import anime_bp
 from app.anime.helpers import bookmark
 
+import logging
+
 @anime_bp.route("/")
 def home():
     animes = [ t[0] for t in Anime.query.with_entities(Anime.name).all() ]
@@ -20,7 +22,7 @@ def anime(anime):
             if bookmark:
                 return redirect(url_for('anime_bp.episode', anime=anime, season=bookmark.season, episode=bookmark.episode))
     except Exception as e:
-        print(e)
+        logging.exception('')
     seasons = [ t[0] for t in Season.query.with_entities(Season.name).filter_by(anime_name=anime).all() ]
     return render_template("anime/anime.html", anime=anime, seasons=seasons)
 
@@ -40,7 +42,7 @@ def episode(anime, season, episode):
             if bookmark:
                 pos = bookmark.position
     except Exception as e:
-        print(e)
+        logging.exception('')
     finally:
         return render_template("anime/episode.html", anime=anime, season=season, episode=episode, path=path, t=str(pos))
 
@@ -51,5 +53,5 @@ def register_timestamp():
         if current_user:
             bookmark(request.form.get("anime"), request.form.get("season"), request.form.get("episode"), current_user.id, pos=request.form.get("t"))
     except Exception as e:
-        print(e)
+        logging.exception('')
     return jsonify(status="ok")

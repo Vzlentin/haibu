@@ -21,7 +21,7 @@ def manga(m):
             if bookmark:
                 return redirect(url_for('scans_bp.page', m=m, c=bookmark.chapter, p=bookmark.page))
     except Exception as e:
-        print(e)
+        logging.exception('')
     chapters = [t[0] for t in Chapter.query.with_entities(Chapter.number).filter_by(manga_name=m).all()]
     return render_template("scans/manga.html", m=m, chapters=chapters)
 
@@ -51,6 +51,6 @@ def page(m, c, p):
         if current_user:
             bookmark(m, c, p, current_user.id)
     except Exception as e:
-        print(e)
+        logging.exception('')
     finally:
         return render_template("scans/page.html", m=m, chapters=chapters, pages=pages, c=c, p=p, path=path)
