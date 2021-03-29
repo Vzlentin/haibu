@@ -15,7 +15,7 @@ from app import app
 def populate_scans(path):
 
     for manga_name in sorted(os.listdir(path)):
-        if not Manga.query(name=manga_name).first():
+        if not Manga.query.filter_by(name=manga_name).first():
             m = Manga(name=manga_name)
             db.session.add(m)
             db.session.commit()
@@ -37,7 +37,7 @@ def populate_scans(path):
 def populate_anime(path):
 
     for anime_name in sorted(os.listdir(path)):
-        if not Anime.query(name=anime_name).first():
+        if not Anime.query.filter_by(name=anime_name).first():
             a = Anime(name=anime_name)
             db.session.add(a)
             db.session.commit()
@@ -57,7 +57,7 @@ def populate_anime(path):
                     db.session.commit()
 
 def genesis():
-    if not User.query(username='vzl3ntin').first():
+    if not User.query.filter_by(username='vzl3ntin').first():
         u = User(username='vzl3ntin')
         db.session.add(u)
         db.session.commit()
