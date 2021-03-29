@@ -15,7 +15,7 @@ from app import app
 def populate_scans(path):
 
     for manga_name in sorted(os.listdir(path)):
-        if not Manga.query(name=manga_name):
+        if not Manga.query(name=manga_name).first():
             m = Manga(name=manga_name)
             db.session.add(m)
             db.session.commit()
@@ -37,7 +37,7 @@ def populate_scans(path):
 def populate_anime(path):
 
     for anime_name in sorted(os.listdir(path)):
-        if not Anime.query(name=anime_name):
+        if not Anime.query(name=anime_name).first():
             a = Anime(name=anime_name)
             db.session.add(a)
             db.session.commit()
