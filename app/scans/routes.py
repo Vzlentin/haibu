@@ -17,7 +17,7 @@ def manga(m):
     try:
         current_user = User.query.filter_by(username=session['username']).first()
         if current_user:
-            bookmark = MangaBookmark.query.filter_by(user_id=current_user.id, manga_name=manga).first()
+            bookmark = MangaBookmark.query.filter_by(user_id=current_user.id, manga_name=m).first()
             if bookmark:
                 return redirect(url_for('scans_bp.page', m=m, c=bookmark.chapter, p=bookmark.page))
     except Exception as e:
