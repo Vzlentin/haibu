@@ -10,11 +10,10 @@ then
 else
 	cd /opt/haibu
 	git pull
-	sudo rm app.db
 fi
 
 cd /opt/haibu/infra
-python3 createdb.py
+python3 syncdb.py
 
 sudo systemctl daemon-reload
-sudo systemctl start haibu.service
+sudo systemctl restart haibu.service
