@@ -37,7 +37,7 @@ def populate_scans(path):
 def populate_anime(path):
 
     for anime_name in sorted(os.listdir(path)):
-        if not Anime.query(name=anime_name)
+        if not Anime.query(name=anime_name):
             a = Anime(name=anime_name)
             db.session.add(a)
             db.session.commit()
