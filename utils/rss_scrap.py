@@ -11,7 +11,7 @@ SCAN_FOLDER = os.path.join(os.environ.get("MEDIA_PATH"), "Scans")
 
 from app import app
 from app.models import Manga, Chapter
-from scrapper import Scrapper
+from scraper import Scraper
 from syncdb import populate_chapter
 
 def main():
@@ -26,7 +26,7 @@ def main():
             if Manga.query.filter_by(name = manga_n).first() and not Chapter.query.filter_by(manga_name = manga_n, number = chapter_nb).first():
 
                 manga_p = os.path.join(SCAN_FOLDER, manga_n)
-                scp = Scrapper(manga_n, manga_p)
+                scp = Scraper(manga_n, manga_p)
                 scp.get_chapter(link)
                 print(f" - Populating database with {manga_n} {chapter_nb}...")
                 populate_chapter(manga_n, chapter_nb, manga_p)

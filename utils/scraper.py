@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 import requests, os
 
-class Scrapper:
+class Scraper:
 
     def __init__(self, mname, dest):
         self._baseurl = "https://www.scan-fr.cc/manga"
@@ -13,7 +13,7 @@ class Scrapper:
             os.mkdir(dest)
 
     def get_all_chapters(self):
-        chapter_links = Scrapper._get_chapter_links(os.path.join(self._baseurl, self._mname))
+        chapter_links = Scraper._get_chapter_links(os.path.join(self._baseurl, self._mname))
         for chap_link in reversed(chapter_links):
             self.get_chapter(chap_link)
 
@@ -25,12 +25,12 @@ class Scrapper:
         if not os.path.exists(chapter_path):
             os.mkdir(chapter_path)
 
-            page_links = Scrapper._get_page_links(chapter_link)
+            page_links = Scraper._get_page_links(chapter_link)
             for page_link in page_links:
                 image_path = os.path.join(chapter_path, page_link.split("/")[-1])
                 
                 if not os.path.exists(image_path):
-                    Scrapper._download_image(page_link, image_path)
+                    Scraper._download_image(page_link, image_path)
 
     @staticmethod
     def _get_chapter_links(url):

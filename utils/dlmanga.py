@@ -8,7 +8,7 @@ sys.path.append(ROOT_FOLDER)
 load_dotenv(os.path.join(ROOT_FOLDER, ".flaskenv"))
 SCAN_FOLDER = os.path.join(os.environ.get("MEDIA_PATH"), "Scans")
 
-from scrapper import Scrapper
+from scraper import Scraper
 import requests
 
 
@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
             requests.get(f"https://www.scan-fr.cc/manga/{manga_name}").raise_for_status()
             destination = os.path.join(SCAN_FOLDER, manga_name)
-            scp = Scrapper(manga_name, destination)
+            scp = Scraper(manga_name, destination)
             scp.get_all_chapters()
 
         except requests.exceptions.HTTPError:
