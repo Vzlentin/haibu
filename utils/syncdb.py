@@ -82,23 +82,13 @@ def genesis():
 
 def main(scans_static_path, anime_static_path):
 
-    print(" - Checking symbolic links")
-
-    if not os.path.islink(scans_static_path):
-        scans_media_path = os.path.join(MEDIA_PATH,"Scans")
-        os.system(f"ln -s {scans_media_path} {scans_static_path}")
-
-    if not os.path.islink(anime_static_path):
-        anime_media_path = os.path.join(MEDIA_PATH,"Anime")
-        os.system(f"ln -s {anime_media_path} {anime_static_path}")
-
     print(" - Populating db")
 
     db.init_app(app)
     with app.app_context():
         if not os.path.exists("app.db"):
             db.create_all()
-        
+
         print(" - Creating user 001")
 
         genesis()

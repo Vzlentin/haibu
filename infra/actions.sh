@@ -12,6 +12,11 @@ else
 	git pull
 fi
 
+MEDIA_PATH = $(grep MEDIA_PATH .flaskenv | cut -d= -f2)
+
+sudo ln -sfn /opt/haibu/app/anime/static $MEDIA_PATH/Anime
+sudo ln -sfn /opt/haibu/app/scans/static $MEDIA_PATH/Scans
+
 cd /opt/haibu/utils
 python3 syncdb.py
 
