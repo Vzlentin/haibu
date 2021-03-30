@@ -12,7 +12,7 @@ else
 	git pull
 fi
 
-cd /opt/haibu/infra
+cd /opt/haibu/utils
 python3 syncdb.py
 
 sudo systemctl daemon-reload
