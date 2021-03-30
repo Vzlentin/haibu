@@ -1,3 +1,0 @@
-01:19:43 INFO  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-01:19:46 INFO 127.0.0.1 - - [30/Mar/2021 13:19:46] "[37mGET /scans/jujutsu-kaisen/143/1 HTTP/1.1[0m" 200 -
-01:19:49 INFO 127.0.0.1 - - [30/Mar/2021 13:19:49] "[37mGET /scans/jujutsu-kaisen/144/1 HTTP/1.1[0m" 200 -
