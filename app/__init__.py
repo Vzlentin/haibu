@@ -18,7 +18,6 @@ def create_app():
 
 def register_extensions(app):
     db.init_app(app)
-    migrate = Migrate(app, db)
     app.register_blueprint(home_bp)
     app.register_blueprint(anime_bp, url_prefix='/anime')
     app.register_blueprint(scans_bp, url_prefix='/scans')

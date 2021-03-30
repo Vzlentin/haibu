@@ -2,7 +2,6 @@
 import os, sys
 
 ROOT_FOLDER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 sys.path.append(ROOT_FOLDER)
 
 from extensions import db
@@ -22,17 +21,25 @@ def populate_scans(path):
             manga_path = os.path.join(path, manga_name)
 
             for chapter_number in sorted(os.listdir(manga_path), key=int):
-                c = Chapter(number=chapter_number, manga_id=m.id, manga_name=m.name)
-                db.session.add(c)
-                db.session.commit()
-                chapter_path = os.path.join(manga_path, chapter_number)
+                populate_chapter(chapter_number)
 
-                for page_filename in sorted(os.listdir(chapter_path), key=lambda i: int(os.path.splitext(i)[0])):
-                    page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
-                    page_number = os.path.splitext(page_filename)[0]
-                    p = Page(number=page_number, manga_id=m.id, manga_name=m.name, chapter_id=c.id, chapter_number=c.number, path=page_path)
-                    db.session.add(p)
-                    db.session.commit()
+
+def populate_chapter(manga_name, chapter_number, manga_path):
+
+    m = Manga.query.filter_by(name=manga_name).first()
+    if not Chapter.query.filter_by(number=chapter_number, manga_id=m.id, manga_name=m.name).first():
+        c = Chapter(number=chapter_number, manga_id=m.id, manga_name=m.name)
+        db.session.add(c)
+        db.session.commit()
+        chapter_path = os.path.join(manga_path, chapter_number)
+
+        for page_filename in sorted(os.listdir(chapter_path), key=lambda i: int(os.path.splitext(i)[0])):
+            page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
+            page_number = os.path.splitext(page_filename)[0]
+            p = Page(number=page_number, manga_id=m.id, manga_name=m.name, chapter_id=c.id, chapter_number=c.number, path=page_path)
+            db.session.add(p)
+            db.session.commit()
+
 
 def populate_anime(path):
 
