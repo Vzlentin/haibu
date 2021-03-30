@@ -12,7 +12,7 @@ else
 	git pull
 fi
 
-MEDIA_PATH=$(grep MEDIA_PATH /opt/haibu/.flaskenv | cut -d= -f2)
+MEDIA_PATH=$(grep MEDIA_PATH /opt/haibu/.flaskenv | cut -d= -f2 | xargs)
 
 sudo ln -sfn $MEDIA_PATH/Anime /opt/haibu/app/anime/static
 sudo ln -sfn $MEDIA_PATH/Scans /opt/haibu/app/scans/static
