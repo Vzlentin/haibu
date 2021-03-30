@@ -20,12 +20,15 @@ def main():
     links = [entry.get("link") for entry in entries]
 
     with app.app_context():
-        for link in links:
+        for link in reversed(links):
             manga_n, chapter_nb = link.split("/")[-2:]
+
             if Manga.query.filter_by(name = manga_n).first() and not Chapter.query.filter_by(manga_name = manga_n, number = chapter_nb).first():
+
                 manga_p = os.path.join(SCAN_FOLDER, manga_n)
                 scp = Scrapper(manga_n, manga_p)
                 scp.get_chapter(link)
+                print(f" - Populating database with {manga_n} {chapter_nb}...")
                 populate_chapter(manga_n, chapter_nb, manga_p)
 
 if __name__ == "__main__":

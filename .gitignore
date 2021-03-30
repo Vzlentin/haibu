@@ -1,5 +1,6 @@
 app.db
-static/
+app/**/static/
+log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
