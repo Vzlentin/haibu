@@ -14,8 +14,8 @@ fi
 
 MEDIA_PATH=$(grep MEDIA_PATH /opt/haibu/.flaskenv | cut -d= -f2 | sed "s/\"//g")
 
-sudo ln -sfn $MEDIA_PATH/Anime /opt/haibu/app/anime/static
-sudo ln -sfn $MEDIA_PATH/Scans /opt/haibu/app/scans/static
+sudo ln -sf $MEDIA_PATH/Anime /opt/haibu/app/anime/static
+sudo ln -sf $MEDIA_PATH/Scans /opt/haibu/app/scans/static
 
 cd /opt/haibu/utils
 python3 syncdb.py
