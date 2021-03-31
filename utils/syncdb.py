@@ -14,6 +14,8 @@ from app import app
 
 def populate_scans(path):
 
+    print(" - Populating database with scans")
+
     for manga_name in sorted(os.listdir(path)):
 
         print(f" - Populating {manga_name}")
@@ -25,7 +27,7 @@ def populate_scans(path):
 
         manga_path = os.path.join(path, manga_name)
 
-        for chapter_number in sorted(os.listdir(manga_path), key=int):
+        for chapter_number in sorted(os.listdir(manga_path), key=float):
 
             populate_chapter(manga_name, chapter_number, manga_path)
 
@@ -54,6 +56,8 @@ def populate_chapter(manga_name, chapter_number, manga_path):
 
 def populate_anime(path):
 
+    print(" - Populating database with animes")
+
     for anime_name in sorted(os.listdir(path)):
         if not Anime.query.filter_by(name=anime_name).first():
             a = Anime(name=anime_name)
@@ -76,6 +80,9 @@ def populate_anime(path):
 
 def genesis():
     if not User.query.filter_by(username='vzl3ntin').first():
+
+        print(" - Creating user 001")
+
         u = User(username='vzl3ntin')
         db.session.add(u)
         db.session.commit()
@@ -89,15 +96,9 @@ def main(scans_static_path, anime_static_path):
         if not os.path.exists("app.db"):
             db.create_all()
 
-        print(" - Creating user 001")
-
         genesis()
 
-        print(" - Populating database with scans")
-
         populate_scans(scans_static_path)
-
-        print(" - Populating database with animes")
 
         populate_anime(anime_static_path)
 
