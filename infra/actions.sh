@@ -23,6 +23,6 @@ python3 syncdb.py
 sudo systemctl daemon-reload
 sudo systemctl enable --now haibu.service
 
-cron = '00 02 * * *   pi      /usr/bin/python3 /opt/haibu/utils/rss_scrap.py >> /opt/haibu/test.log'
+cron="00 02 * * *   pi      /usr/bin/python3 /opt/haibu/utils/rss_scrap.py >> /opt/haibu/test.log"
 
-#sudo grep "rss_scap" /etc/crontab || sudo echo $cron >> /etc/crontab
+sudo grep "rss_scap" /etc/crontab || sudo echo $cron >> /etc/crontab
