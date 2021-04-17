@@ -7,7 +7,7 @@
 		<h1>{{m}} {{c}}</h1>
 		<a href="{{ url_for('home_bp.home')}}">Menu</a>
 		<div id="navigation">
-			<a href="{{ url_for('scans_bp.page', m=m, c=c-1, p=1) }}">Previous chapter</a>
+			<a href="{{ url_for('scans_bp.page', m=m, c=c-1, p=1) }}">Last chapter</a>
 			<a href="{{ url_for('scans_bp.page', m=m, c=c+1, p=1) }}">Next chapter</a>
 			<select name="listchapters" onchange="location = this.value;">Chapters
             			{% for select_chapter in chapters %}
@@ -19,7 +19,7 @@
 				<option {% if select_page == p %} selected = "selected" {% endif %} value="{{ url_for('scans_bp.page', m=m, c=c, p=select_page) }}">{{select_page}}</option>
             			{% endfor %}
          		</select>
-			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p-1) }}">Previous page</a>
+			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p-1) }}">Last page</a>
 			<a href="{{ url_for('scans_bp.page', m=m, c=c, p=p+1) }}">Next page</a>
 		</div>
 		<div style="text-align: center">
