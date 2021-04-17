@@ -25,4 +25,4 @@ sudo systemctl enable --now haibu.service
 
 cron="00 02 * * *   pi      /usr/bin/python3 /opt/haibu/utils/rss_scrap.py >> /opt/haibu/test.log"
 
-grep -qF "rss_scrap" /etc/crontab  || echo "$cron" | sudo tee --append /etc/crontab
+grep -qF "$cron" /etc/crontab  || echo "$cron" | sudo tee --append /etc/crontab
