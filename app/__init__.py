@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from flask import Flask
-from flask_migrate import Migrate
 
 from config import Config
 from extensions import db
