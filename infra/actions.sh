@@ -14,8 +14,8 @@ fi
 
 MEDIA_PATH=$(grep MEDIA_PATH /opt/haibu/.flaskenv | cut -d= -f2 | sed "s/\"//g")
 
-sudo ln -s $MEDIA_PATH/Anime /opt/haibu/app/anime/static
-sudo ln -s $MEDIA_PATH/Scans /opt/haibu/app/scans/static
+sudo ln -sn $MEDIA_PATH/Anime /opt/haibu/app/anime/static
+sudo ln -sn $MEDIA_PATH/Scans /opt/haibu/app/scans/static
 
 cd /opt/haibu/utils
 python3 syncdb.py
@@ -23,6 +23,6 @@ python3 syncdb.py
 sudo systemctl daemon-reload
 sudo systemctl enable --now haibu.service
 
-cron="00 02 * * *   pi      /usr/bin/python3 /opt/haibu/utils/rss_scrap.py >> /opt/haibu/test.log"
+cron="00 12 * * *   pi      /usr/bin/python3 /opt/haibu/utils/rss_scrap.py >> /opt/haibu/test.log"
 
 grep -qF "$cron" /etc/crontab  || echo "$cron" | sudo tee --append /etc/crontab
