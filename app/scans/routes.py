@@ -6,6 +6,8 @@ from app.models import User, Manga, Chapter, Page, MangaBookmark
 from app.scans import scans_bp
 from app.scans.helpers import bookmark
 
+import logging
+
 @scans_bp.route("/")
 def home():
     mangas = [t[0] for t in Manga.query.with_entities(Manga.name).all()]
