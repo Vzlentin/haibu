@@ -4,9 +4,9 @@ After=network.target
 
 [Service]
 User=pi
+Group=www-data
 WorkingDirectory=/opt/haibu
-ExecStart=python3 /opt/haibu/haibu.py
-Restart=always
+ExecStart=uwsgi --ini haibu.ini:wq
 
 [Install]
 WantedBy=multi-user.target

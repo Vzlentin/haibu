@@ -1,5 +1,6 @@
 app.db
-app/**/static/
+app/anime/static
+app/scans/static
 log
 
 # Byte-compiled / optimized / DLL files
