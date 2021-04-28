@@ -6,7 +6,7 @@ After=network.target
 User=pi
 Group=www-data
 WorkingDirectory=/opt/haibu
-ExecStart=uwsgi --ini haibu.ini:wq
+ExecStart=uwsgi --ini haibu.ini
 
 [Install]
 WantedBy=multi-user.target
