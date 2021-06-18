@@ -20,7 +20,7 @@ def populate_scans(path):
 
     print(" - Populating database with scans")
 
-    for manga_name in sorted(os.listdir(path)):
+    for manga_name in natural_sort(os.listdir(path)):
 
         try: 
 
@@ -33,7 +33,7 @@ def populate_scans(path):
 
             manga_path = os.path.join(path, manga_name)
 
-            for chapter_number in sorted(os.listdir(manga_path), key=natural_sort):
+            for chapter_number in natural_sort(os.listdir(manga_path)):
 
                 try:
                     populate_chapter(manga_name, chapter_number, manga_path)
@@ -48,19 +48,23 @@ def populate_chapter(manga_name, chapter_number, manga_path):
 
     m = Manga.query.filter_by(name=manga_name).first()
 
-    if not Chapter.query.filter_by(number=chapter_number, manga_id=m.id, manga_name=m.name).first():
+    print(chapter_number)
 
-        print(chapter_number)
+    if not Chapter.query.filter_by(number=chapter_number, manga_id=m.id, manga_name=m.name).first():
 
         c = Chapter(number=chapter_number, manga_id=m.id, manga_name=m.name)
         db.session.add(c)
         db.session.commit()
-        chapter_path = os.path.join(manga_path, chapter_number)
 
-        for page_filename in sorted(os.listdir(chapter_path), key=natural_sort):
+    chapter_path = os.path.join(manga_path, chapter_number)
 
-            page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
-            page_number = os.path.splitext(page_filename)[0]
+    for page_filename in natural_sort(os.listdir(chapter_path)):
+
+        page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
+        page_number = os.path.splitext(page_filename)[0]
+
+        if not Page.query.filter_by(manga_id=m.id, manga_name=m.name, chapter_number=c.number, path=page_path, number=page_number).first()
+
             p = Page(number=page_number, manga_id=m.id, manga_name=m.name, chapter_id=c.id, chapter_number=c.number, path=page_path)
             db.session.add(p)
             db.session.commit()
@@ -70,20 +74,20 @@ def populate_anime(path):
 
     print(" - Populating database with animes")
 
-    for anime_name in sorted(os.listdir(path)):
+    for anime_name in natural_sort(os.listdir(path)):
         if not Anime.query.filter_by(name=anime_name).first():
             a = Anime(name=anime_name)
             db.session.add(a)
             db.session.commit()
             anime_path = os.path.join(path, anime_name)
 
-            for season_name in sorted(os.listdir(anime_path), key=natural_sort):
+            for season_name in natural_sort(os.listdir(anime_path)):
                 s = Season(name=season_name, anime_id=a.id, anime_name=a.name)
                 db.session.add(s)
                 db.session.commit()
                 season_path = os.path.join(anime_path, season_name)
 
-                for episode_filename in sorted(os.listdir(season_path), key=natural_sort):
+                for episode_filename in natural_sort(os.listdir(season_path)):
                     episode_path = os.path.join(anime_name, (os.path.join(season_name, episode_filename)))
                     episode_name = os.path.splitext(episode_filename)[0]
                     e = Episode(name=episode_name, anime_id=a.id, anime_name=a.name, season_id=s.id, season_name=s.name, path=episode_path)
