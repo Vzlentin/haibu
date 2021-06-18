@@ -9,10 +9,12 @@ from extensions import db
 from config import MEDIA_PATH
 
 from app.models import *
-from app import app
+from app import app 
 
-def clean_non_numeric(string):
-    return re.sub("[^0-9]", "", string)
+def natural_sort(l): 
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    return sorted(l, key=alphanum_key)
 
 def populate_scans(path):
 
@@ -31,11 +33,12 @@ def populate_scans(path):
 
             manga_path = os.path.join(path, manga_name)
 
-            for chapter_number in sorted(os.listdir(manga_path), key=lambda i: float(clean_non_numeric(i))):
+            for chapter_number in sorted(os.listdir(manga_path), key=natural_sort):
 
                 try:
                     populate_chapter(manga_name, chapter_number, manga_path)
                 except:
+                    
                     raise RuntimeError(f"Error populating {manga_name} {chapter_number}")
         except:
             raise
@@ -54,7 +57,7 @@ def populate_chapter(manga_name, chapter_number, manga_path):
         db.session.commit()
         chapter_path = os.path.join(manga_path, chapter_number)
 
-        for page_filename in sorted(os.listdir(chapter_path), key=lambda i: int(clean_non_numeric(os.path.splitext(i)[0]))):
+        for page_filename in sorted(os.listdir(chapter_path), key=natural_sort):
 
             page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
             page_number = os.path.splitext(page_filename)[0]
@@ -74,13 +77,13 @@ def populate_anime(path):
             db.session.commit()
             anime_path = os.path.join(path, anime_name)
 
-            for season_name in sorted(os.listdir(anime_path)):
+            for season_name in sorted(os.listdir(anime_path), key=natural_sort):
                 s = Season(name=season_name, anime_id=a.id, anime_name=a.name)
                 db.session.add(s)
                 db.session.commit()
                 season_path = os.path.join(anime_path, season_name)
 
-                for episode_filename in sorted(os.listdir(season_path)):
+                for episode_filename in sorted(os.listdir(season_path), key=natural_sort):
                     episode_path = os.path.join(anime_name, (os.path.join(season_name, episode_filename)))
                     episode_name = os.path.splitext(episode_filename)[0]
                     e = Episode(name=episode_name, anime_id=a.id, anime_name=a.name, season_id=s.id, season_name=s.name, path=episode_path)
