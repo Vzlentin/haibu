@@ -20,18 +20,25 @@ def populate_scans(path):
 
     for manga_name in sorted(os.listdir(path)):
 
-        print(f" - Populating {manga_name}")
+        try: 
 
-        if not Manga.query.filter_by(name=manga_name).first():
-            m = Manga(name=manga_name)
-            db.session.add(m)
-            db.session.commit()
+            print(f" - Populating {manga_name}")
 
-        manga_path = os.path.join(path, manga_name)
+            if not Manga.query.filter_by(name=manga_name).first():
+                m = Manga(name=manga_name)
+                db.session.add(m)
+                db.session.commit()
 
-        for chapter_number in sorted(os.listdir(manga_path), key=lambda i: float(clean_non_numeric(i))):
+            manga_path = os.path.join(path, manga_name)
 
-            populate_chapter(manga_name, chapter_number, manga_path)
+            for chapter_number in sorted(os.listdir(manga_path), key=lambda i: float(clean_non_numeric(i))):
+
+                try:
+                    populate_chapter(manga_name, chapter_number, manga_path)
+                except:
+                    raise RuntimeError(f"Error populating {manga_name} {chapter_number}")
+        except:
+            raise
 
 
 def populate_chapter(manga_name, chapter_number, manga_path):
