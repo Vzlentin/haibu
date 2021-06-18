@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, sys
+import os, sys, re
 
 ROOT_FOLDER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_FOLDER)
@@ -11,6 +11,8 @@ from config import MEDIA_PATH
 from app.models import *
 from app import app
 
+def clean_non_numeric(string):
+    return re.sub("[^0-9]", "", string)
 
 def populate_scans(path):
 
@@ -27,7 +29,7 @@ def populate_scans(path):
 
         manga_path = os.path.join(path, manga_name)
 
-        for chapter_number in sorted(os.listdir(manga_path), key=float):
+        for chapter_number in sorted(os.listdir(manga_path), key=lambda i: float(clean_non_numeric(i))):
 
             populate_chapter(manga_name, chapter_number, manga_path)
 
@@ -45,7 +47,7 @@ def populate_chapter(manga_name, chapter_number, manga_path):
         db.session.commit()
         chapter_path = os.path.join(manga_path, chapter_number)
 
-        for page_filename in sorted(os.listdir(chapter_path), key=lambda i: int(os.path.splitext(i)[0])):
+        for page_filename in sorted(os.listdir(chapter_path), key=lambda i: int(clean_non_numeric(os.path.splitext(i)[0]))):
 
             page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
             page_number = os.path.splitext(page_filename)[0]
