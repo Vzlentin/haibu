@@ -56,14 +56,12 @@ def populate_chapter(manga_name, chapter_number, manga_path):
         db.session.add(c)
         db.session.commit()
 
-    chapter_path = os.path.join(manga_path, chapter_number)
+        chapter_path = os.path.join(manga_path, chapter_number)
 
-    for page_filename in natural_sort(os.listdir(chapter_path)):
+        for page_filename in natural_sort(os.listdir(chapter_path)):
 
-        page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
-        page_number = os.path.splitext(page_filename)[0]
-
-        if not Page.query.filter_by(manga_id=m.id, manga_name=m.name, chapter_number=c.number, path=page_path, number=page_number).first()
+            page_path = os.path.join(manga_name, (os.path.join(chapter_number, page_filename)))
+            page_number = os.path.splitext(page_filename)[0]
 
             p = Page(number=page_number, manga_id=m.id, manga_name=m.name, chapter_id=c.id, chapter_number=c.number, path=page_path)
             db.session.add(p)
